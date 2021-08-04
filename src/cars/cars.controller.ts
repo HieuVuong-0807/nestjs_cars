@@ -13,5 +13,16 @@ export class CarsController {
         ];
     }
 
+    @Get('showcase')
+    showcase(@Req() request: Request): string {
+        return 'this is the cars showcase';
+
+    }
+
+    @Get(':id')
+    findOne(@Req() request: Request): {} {
+        return {id: 25, make: 'tesla', model: 'model x'};
+    }
+
 
 }
