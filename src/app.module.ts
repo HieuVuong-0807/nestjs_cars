@@ -20,7 +20,7 @@ import { FlightsModule } from './flights/flights.module';
       password: 'password',
       database: 'transportation',
       entities: [Car, Flight],
-      synchronize: true,
+      synchronize: false,
     }),
     CarModule,
     FlightsModule,

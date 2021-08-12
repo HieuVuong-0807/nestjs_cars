@@ -13,7 +13,7 @@ export class Flight {
     destination: string;
 
     @Column('int')
-    flightNumber: number;
+    flightnumber: number;
 
     @Column('timestamp with time zone')
     depart: Date;
