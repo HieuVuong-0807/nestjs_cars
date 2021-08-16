@@ -34,6 +34,7 @@ export class FlightsController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
+    //to DO
     return this.flightsService.remove(+id);
   }
 }
