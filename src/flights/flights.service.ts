@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateFlightDto } from './dto/create-flight.dto';
@@ -23,6 +23,10 @@ export class FlightsService {
 
   findOne(id: number) {
     return this.flightRepository.findOne(id);
+  }
+
+  async query(orig: string, dest: string): Promise<any> {
+    return this.flightRepository.find({origin: orig, destination: dest});
   }
 
   update(id: number, updateFlightDto: UpdateFlightDto) {

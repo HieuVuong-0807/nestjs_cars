@@ -22,6 +22,11 @@ export class FlightsController {
     return this.flightsService.findOne(+id);
   }
 
+  @Get("query/:orig/:dest")
+  async query(@Param('orig') orig, @Param('dest')dest): Promise<any> {
+    return this.flightsService.query(orig, dest);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFlightDto: UpdateFlightDto) {
     return this.flightsService.update(+id, updateFlightDto);
