@@ -2,14 +2,15 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FlightsService } from './flights.service';
 import { CreateFlightDto } from './dto/create-flight.dto';
 import { UpdateFlightDto } from './dto/update-flight.dto';
+import { Flight } from './entities/flight.entity';
 
 @Controller('flights')
 export class FlightsController {
   constructor(private readonly flightsService: FlightsService) {}
 
   @Post()
-  create(@Body() createFlightDto: CreateFlightDto) {
-    return this.flightsService.create(createFlightDto);
+  async create(@Body() flight: Flight): Promise<Flight[]> {
+    return this.flightsService.create(flight);
   }
 
   @Get()
@@ -27,14 +28,15 @@ export class FlightsController {
     return this.flightsService.query(orig, dest);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFlightDto: UpdateFlightDto) {
-    return this.flightsService.update(+id, updateFlightDto);
+  @Patch(':id/update')
+  async update(@Param('id') id: string, @Body() flight: Flight): Promise<any> {
+    flight.id = Number(id);
+    return this.flightsService.update(flight);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(':id/delete')
+  async delete(@Param('id') id: string): Promise<any> {
     //to DO
-    return this.flightsService.remove(+id);
+    return this.flightsService.delete(Number(id));
   }
 }

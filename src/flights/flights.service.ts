@@ -1,6 +1,6 @@
 import { Injectable, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { CreateFlightDto } from './dto/create-flight.dto';
 import { UpdateFlightDto } from './dto/update-flight.dto';
 import { Flight } from './entities/flight.entity';
@@ -13,8 +13,8 @@ export class FlightsService {
     private flightRepository: Repository<Flight>
     ) {}
 
-  create(createFlightDto: CreateFlightDto) {
-    return 'This action adds a new flight';
+  async create(flight: Flight): Promise<any> {
+    return await this.flightRepository.save(flight);
   }
 
   async findAll(): Promise<Flight[]> {
@@ -29,11 +29,11 @@ export class FlightsService {
     return this.flightRepository.find({origin: orig, destination: dest});
   }
 
-  update(id: number, updateFlightDto: UpdateFlightDto) {
-    return `This action updates a #${id} flight`;
+  async update(flight: Flight): Promise<UpdateResult> {
+    return await this.flightRepository.update(flight.id, flight);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} flight`;
+  async delete(id: number): Promise<any> {
+    return this.flightRepository.delete(id);
   }
 }
