@@ -23,7 +23,7 @@ export class FlightsController {
     return this.flightsService.findOne(+id);
   }
 
-  @Get("query/:orig/:dest")
+  @Get('query/:orig/:dest')
   async query(@Param('orig') orig, @Param('dest')dest): Promise<any> {
     return this.flightsService.query(orig, dest);
   }
@@ -38,5 +38,15 @@ export class FlightsController {
   async delete(@Param('id') id: string): Promise<any> {
     //to DO
     return this.flightsService.delete(Number(id));
+  }
+
+  @Get('cities/origin')
+  async getOrigin(): Promise<string[]> {
+    return this.flightsService.getFlightOrigin();
+  }
+
+  @Get('cities/destination')
+  async getDestination(): Promise<string[]> {
+    return this.flightsService.getFlightDestination();
   }
 }
