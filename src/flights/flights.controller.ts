@@ -28,15 +28,14 @@ export class FlightsController {
     return this.flightsService.query(orig, dest);
   }
 
-  @Patch(':id/update')
+  @Post(':id/update')
   async update(@Param('id') id: string, @Body() flight: Flight): Promise<any> {
     flight.id = Number(id);
     return this.flightsService.update(flight);
   }
 
-  @Delete(':id/delete')
+  @Post(':id/delete')
   async delete(@Param('id') id: string): Promise<any> {
-    //to DO
     return this.flightsService.delete(Number(id));
   }
 
